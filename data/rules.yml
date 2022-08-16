@@ -1,0 +1,277 @@
+version: "2.0"
+
+rules:
+
+- rule: Ask user name at conversation start
+  conversation_start: true  # this rule only applies at the beginning of a conversation
+  steps:
+    - intent: greet
+    - action: utter_welcome
+    - action: name_form
+    - active_loop: name_form
+
+- rule: Submit name form and utter metrostar basic info
+  condition:
+  # Condition that form is active.
+  - active_loop: name_form
+  steps:
+  # Form is deactivated
+  - action: name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_metrostar_basic_info
+
+- rule: Greet back user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Reply to thank
+  steps:
+  - intent: thank
+  - action: utter_urwelcome
+
+- rule: Reponse whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_for_fallback
+
+- rule: Reponse when user buy to invest
+  steps:
+  - intent: user_buy_to_invest
+  - action: utter_metrostar_invest_info
+
+- rule: Reponse when user buy to stay
+  steps:
+  - intent: user_buy_to_stay
+  - action: utter_detail_for_user_buy_to_stay
+
+- rule: Utter webiste when user want to visit it
+  steps:
+  - intent: user_want_visit_website
+  - action: utter_website
+
+- rule: Reponse when user want metrostar detail
+  steps:
+  - intent: user_want_metrostar_detail
+  - action: utter_metrostar_details
+
+- rule: Reponse when user want to know investor
+  steps:
+  - intent: user_want_to_know_investors
+  - action: utter_investors
+
+- rule: Reponse when user want to know location
+  steps:
+  - intent: user_want_to_know_metrostar_location
+  - action: action_utter_metrostar_location
+
+- rule: Reponse when user want to know scale
+  steps:
+  - intent: user_want_to_know_metrostar_scale
+  - action: utter_metrostar_scale
+
+- rule: Reponse when user want sales policy
+  steps:
+  - intent: user_want_sales_policy
+  - action: utter_sales_policy
+
+- rule: Reponse when user ask about loan procedure
+  steps:
+  - intent: user_ask_about_loan_procedure
+  - action: action_utter_loan_procedure
+
+- rule: Reponse when user ask type of loan
+  steps:
+  - intent: user_ask_type_of_loan
+  - action: utter_type_of_loan
+
+- rule: Reponse when user ask preferential interest rate
+  steps:
+  - intent: user_ask_preferential_interest_rate
+  - action: utter_preferential_interest_rate
+
+- rule: Reponse when user ask how to pay
+  steps:
+  - intent: user_ask_how_to_pay
+  - action: action_utter_how_to_pay
+
+- rule: Reponse when user ask amount of money to pay
+  steps:
+  - intent: user_ask_amount_of_money_to_pay
+  - action: action_utter_amount_of_money_to_pay
+
+- rule: Reponse when user want to know internal area
+  steps:
+  - intent: user_want_to_know_internal_area
+  - action: utter_internal_area
+
+- rule: Reponse when user ask for flat detail
+  steps:
+  - intent: user_ask_flat_detail
+  - action: utter_flat_detail
+
+- rule: Reponse when user ask for shophouse detail
+  steps:
+  - intent: user_ask_shophouse_detail
+  - action: utter_shophouse_detail
+
+- rule: Reponse when user ask for utility detail
+  steps:
+  - intent: user_ask_utility_detail
+  - action: action_utter_utility_detail
+
+- rule: Reponse when user want to know progress
+  steps:
+  - intent: user_want_to_know_progress
+  - action: utter_metrostar_progress
+
+- rule: Activate consultation info form when user need consultation
+  steps:
+  - intent: user_need_consultation
+  - action: consultation_info_form
+  - active_loop: consultation_info_form
+
+- rule: Submit consultation info form
+  condition:
+  # Condition that form is active.
+  - active_loop: consultation_info_form
+  steps:
+  # Form is deactivated
+  - action: consultation_info_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_store_consultation_info
+
+- rule: Activate form when user register to visit sample house
+  steps:
+  - intent: user_register_to_visit_sample_house
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+
+- rule: Submit sample house visitor form
+  condition:
+  # Condition that form is active.
+  - active_loop: sample_house_visitor_form
+  steps:
+  # Form is deactivated
+  - action: sample_house_visitor_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_store_sample_house_visitor_info
+
+- rule: Reponse when user complain
+  steps:
+  - intent: complain
+  - action: utter_handle_complain
+
+- rule: Reponse when user ask legal docs
+  steps:
+  - intent: user_ask_legal_docs
+  - action: action_utter_legal_docs
+
+- rule: Reponse when user ask raise capital letter
+  steps:
+  - intent: user_ask_raise_capital_letter
+  - action: action_utter_raise_capital_letter
+
+- rule: Reponse when user ask construction permit
+  steps:
+  - intent: user_ask_construction_permit
+  - action: utter_construction_permit
+
+- rule: Reponse when user ask 30 floors construction permit
+  steps:
+  - intent: user_ask_30_floors_construction_permit
+  - action: action_utter_30_floors_construction_permit
+
+- rule: Reponse when user ask sale contract
+  steps:
+  - intent: user_ask_sale_contract_signning_condition
+  - action: action_utter_sale_contract_signning_condition
+
+- rule: Reponse when user ask apartment hand over time
+  steps:
+  - intent: user_ask_apt_hand_over_time
+  - action: utter_apt_hand_over_time
+
+- rule: Reponse when user ask about bank guarantee
+  steps:
+  - intent: user_ask_bank_guarantee
+  - action: action_utter_bank_guarantee
+
+- rule: Reponse when user ask sale contract signning procedure
+  steps:
+  - intent: user_ask_sale_contract_signning_procedure
+  - action: utter_sale_contract_signning_procedure
+
+- rule: Reponse when user ask sale contract signning time
+  steps:
+  - intent: user_ask_sale_contract_signning_time
+  - action: action_utter_sale_contract_signning_time
+
+- rule: Reponse when user ask sale contract signning file
+  steps:
+  - intent: user_ask_sale_contract_signning_file
+  - action: utter_sale_contract_signning_file
+
+- rule: Reponse when user want edit sale contract signning file
+  steps:
+  - intent: user_want_edit_sale_contract_signning_file
+  - action: utter_edit_sale_contract_signning_file
+
+- rule: Reponse when user ask sale contract transfer procedure
+  steps:
+  - intent: user_ask_sale_contract_transfer_procedure
+  - action: action_utter_sale_contract_transfer_procedure
+
+- rule: Reponse when user ask sale contract transfer file
+  steps:
+  - intent: user_ask_sale_contract_transfer_file
+  - action: action_utter_sale_contract_transfer_file
+
+- rule: Reponse when user ask sale contract transfer fee
+  steps:
+  - intent: user_ask_sale_contract_transfer_fee
+  - action: utter_sale_contract_transfer_fee
+
+- rule: Reponse when user ask liquidate procedure
+  steps:
+  - intent: user_ask_liquidation_procedure
+  - action: action_utter_liquidation_procedure
+
+- rule: Reponse when user ask liquidation file
+  steps:
+  - intent: user_ask_liquidation_file
+  - action: utter_liquidation_file
+
+- rule: Reponse when user ask when they get money after liquidation
+  steps:
+  - intent: user_ask_when_they_get_money_after_liquidation
+  - action: utter_money_after_liquidation
+
+- rule: Reponse when user ask operation management fee
+  steps:
+  - intent: user_ask_operation_management_fee
+  - action: utter_operation_management_fee
+
+- rule: Reponse when user ask parking lot
+  steps:
+  - intent: user_ask_parking_lot
+  - action: utter_parking_lot

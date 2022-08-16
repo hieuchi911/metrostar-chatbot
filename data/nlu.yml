@@ -1,0 +1,826 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hello tôi đây
+    - alo
+    - bot ơi
+    - ad ơi
+    - admin ơi
+    - chào
+    - Chào
+    - xin chào
+    - chào bạn
+    - chào buổi sáng
+    - buổi sáng tốt lành
+    - chào buổi chiều
+    - chào buổi trưa
+    - đằng này chào đằng ấy
+    - có ai không
+    - hỏi tý
+    - tôi muốn hỏi
+    - mình muốn hỏi
+    - cần hỗ trợ
+    - cần trợ giúp
+    - cần support
+    - nhờ chút
+    - khởi chạy
+    - hello world
+    - bắt đầu
+    - getting started
+- intent: goodbye
+  examples: |
+    - tạm biệt
+    - từ biệt
+    - cáo từ
+    - chào tạm biệt
+    - bye
+    - bye bye
+    - hẹn gặp lại
+- intent: affirm
+  examples: |
+    - yes
+    - có
+    - ok
+    - chốt
+    - ổn đấy
+    - đúng
+    - chuẩn
+    - đúng rồi
+    - chắc chắn rồi
+- intent: deny
+  examples: |
+    - no
+    - không
+    - thôi
+    - khỏi
+    - không đâu
+    - không hẳn
+    - không được
+    - không ổn
+- intent: bot_challenge
+  examples: |
+    - bạn là bot à?
+    - bạn là người hả?
+    - mình đang nói chuyện với bot hả?
+    - tôi đang nói chuyện với người à?
+    - mình đang nói chuyện với người thật hả?
+    - bạn là bot, phải không?
+    - bạn có phải người thật không
+- intent: complain
+  examples: |
+    - Trông chán
+    - Trông chán thế
+    - Lừa đảo
+    - Trông giống lừa đảo
+    - Trông như lừa đảo
+    - Lừa đảo phải không
+    - Trông không đúng lắm
+    - Nhìn không đúng lắm
+    - Cái này không đúng lắm 
+    - Trông không giống
+    - Nhìn không giống
+    - Cái này không giống lắm
+- intent: user_give_name
+  examples: |
+    - Tôi tên là [Hiếu](name)
+    - [Chí Hiếu](name) là tên mình
+    - Tôi tên [Nguyễn Trần Chí Hiếu](name)
+    - Mình tên là [Nam](name)
+    - [Hoài Nam](name) là tên tôi
+    - Mình tên [Nguyễn Văn Hoài Nam](name)
+    - [Hiển](name)
+    - [Ngọc Hiển](name)
+    - [Lê Ngọc Hiển](name)
+    - [Trinh](name)
+    - [Bảo Trinh](name)
+    - [Nguyễn Hồ Bảo Trinh](name)
+    - [Kiệt](name)
+    - [Tuấn Kiệt](name)
+    - [Chung Hoàng Tuấn Kiệt](name)
+    - [Bình](name)
+    - [Tam Bình](name)
+    - [Nguyễn Văn Tam Bình](name)
+    - [Hoàng](name)
+    - [Việt Hoàng](name)
+    - [Chương Việt Hoàng](name)
+    - [Đế](name)
+    - [Quyền Đế](name)
+    - [Trịnh Quyền Đế](name)
+    - [Khoa](name)
+    - [Anh Khoa](name)
+    - [Nguyễn Võ Anh Khoa](name)
+    - [Đông](name)
+    - [Quang Đông](name)
+    - [Bồ Quang Đông](name)
+    - [Duy Hoàng](name)
+    - [Đồ Nguyễn Duy Hoàng](name)
+    - [Phúc](name)
+    - [Thanh Phúc](name)
+    - [Trần Thanh Phúc](name)
+    - [Nguyên](name)
+    - [Khôi Nguyên](name)
+    - [Nguyễn Ngọc Khôi Nguyên](name)
+    - [Huấn](name)
+    - [Minh Huấn](name)
+    - [Trần Minh Huấn](name)
+
+- intent: user_give_email
+  examples: |
+    - Email là [sample@example.com](email)
+    - Email của tôi là [peter.parker@zylker.com](email)
+    - [jason.p@gmail.com](email) là email của tôi
+    - [nam.nguyen@outlook.com](email) là email của mình
+    - [phuctran123@hotmail.com](email)
+    - [dong-bo-598@live.com](email)
+    - [anh.khoa@yahoo.com](email)
+    - [de-trinh@gmail.com.vn](email)
+    - [ninh.nguyen@yahoo.com.vn](email)
+    - [hoangchuong@protonmail.com](email)
+
+# https://stackoverflow.com/a/9204568
+- regex: email
+  examples: |
+    - ^[^\s@]+@[^\s@]+\.[^\s@]+$
+
+- intent: user_give_phone_number
+  examples: |
+    - Số điện thoại của tôi là [0785903625](phone_number)
+    - Số máy của mình là [0934088364](phone_number)
+    - Đây là số của mình [0913721153](phone_number)
+    - [0345730332](phone_number) là số điện thoại của tôi
+    - [0796913305](phone_number) là số máy của tôi
+    - [0879228607](phone_number) đây là số của tôi
+    - [0915608572](phone_number)
+    - [0938708567](phone_number)
+    - [0942342608](phone_number)
+    - [0964851106](phone_number)
+    - [0986321310](phone_number)
+    - [+84915608572](phone_number)
+    - [+84785903625](phone_number)
+    - [+84934088364](phone_number)
+    - [+84345730332](phone_number)
+    - [+84796913305](phone_number)
+    - [+84879228607](phone_number)
+    - [+84913721153](phone_number)
+    - [+84938708567](phone_number)
+    - [+84942342608](phone_number)
+    - [+84964851106](phone_number)
+    - [+84986321310](phone_number)
+
+- regex: phone_number
+  examples: |
+    - \+84\d{9}
+    - \+84\d{2}-\d{3}-\d{4}
+    - \+84\d{2}\.\d{3}\.\d{4}
+    - \+84\d{2}\s\d{3}\s\d{4}
+    - 0\d{9}
+    - \d{3}-\d{3}-\d{4}
+    - \d{3}\.\d{3}\.\d{4}
+    - \d{3}\s\d{3}\s\d{4}
+
+- intent: user_give_date
+  examples: |
+    - [7/3](date)
+    - [20/2](date)
+    - [03/04](date)
+    - [18/01](date)
+    - [1/12](date)
+    - [9/4/2022](date)
+    - [11/5/2023](date)
+    - [04/04/2025](date)
+    - [26/06/2021](date)
+    - [31/12/2024](date)
+    - [2-7](date)
+    - [05-01](date)
+    - [02-12](date)
+    - [21-09](date)
+    - [10-12](date)
+    - [30-10-2022](date)
+    - [2.1.2019](date)
+    - [07.03.2023](date)
+    - [12.02.2020](date)
+    - [06.11.2021](date)
+    - [13.12.2022](date)
+    - [3 tháng 5](date)
+    - [07 tháng 06](date)
+    - [14 tháng 07](date)
+    - [08 tháng 12](date)
+    - [15 tháng 11](date)
+    - [9 tháng 6 năm 2022](date)
+    - [09 tháng 05 năm 2023](date)
+    - [15 tháng 07 năm 2024](date)
+    - [06 tháng 12 năm 2026](date)
+    - [30 tháng 11 năm 2025](date)
+    - [ngày 5 tháng 6](date)
+    - [ngày 09 tháng 06](date)
+    - [ngày 18 tháng 07](date)
+    - [ngày 06 tháng 12](date)
+    - [ngày 19 tháng 11](date)
+    - [ngày 4 tháng 1 năm 2022](date)
+    - [ngày 05 tháng 11 năm 2023](date)
+    - [ngày 16 tháng 01 năm 2024](date)
+    - [ngày 06 tháng 07 năm 2025](date)
+    - [ngày 17 tháng 12 năm 2026](date)
+
+- intent: user_give_time
+  examples: |
+    - [sáng](time)
+    - [trưa](time)
+    - [chiều](time)
+    - [tối](time)
+    - [0 giờ](time)
+    - [1 giờ](time)
+    - [2 giờ](time)
+    - [3 giờ](time)
+    - [4 giờ](time)
+    - [5 giờ](time)
+    - [6 giờ](time)
+    - [7 giờ](time)
+    - [8 giờ](time)
+    - [9 giờ](time)
+    - [10 giờ](time)
+    - [11 giờ](time)
+    - [12 giờ](time)
+    - [13 giờ](time)
+    - [14 giờ](time)
+    - [15 giờ](time)
+    - [16 giờ](time)
+    - [17 giờ](time)
+    - [18 giờ](time)
+    - [19 giờ](time)
+    - [20 giờ](time)
+    - [21 giờ](time)
+    - [22 giờ](time)
+    - [23 giờ](time)
+    - [24 giờ](time)
+    - [1 giờ sáng](time)
+    - [2 giờ sáng](time)
+    - [3 giờ sáng](time)
+    - [4 giờ sáng](time)
+    - [5 giờ sáng](time)
+    - [6 giờ sáng](time)
+    - [7 giờ sáng](time)
+    - [8 giờ sáng](time)
+    - [9 giờ sáng](time)
+    - [10 giờ sáng](time)
+    - [11 giờ sáng](time)
+    - [12 giờ sáng](time)
+    - [1 giờ tối](time)
+    - [2 giờ tối](time)
+    - [3 giờ tối](time)
+    - [4 giờ tối](time)
+    - [5 giờ tối](time)
+    - [6 giờ tối](time)
+    - [7 giờ tối](time)
+    - [8 giờ tối](time)
+    - [9 giờ tối](time)
+    - [10 giờ tối](time)
+    - [11 giờ tối](time)
+    - [12 giờ tối](time)
+    - [0 rưỡi](time)
+    - [1 rưỡi](time)
+    - [2 rưỡi](time)
+    - [3 rưỡi](time)
+    - [4 rưỡi](time)
+    - [5 rưỡi](time)
+    - [6 rưỡi](time)
+    - [7 rưỡi](time)
+    - [8 rưỡi](time)
+    - [9 rưỡi](time)
+    - [10 rưỡi](time)
+    - [11 rưỡi](time)
+    - [12 rưỡi](time)
+    - [13 rưỡi](time)
+    - [14 rưỡi](time)
+    - [15 rưỡi](time)
+    - [16 rưỡi](time)
+    - [17 rưỡi](time)
+    - [18 rưỡi](time)
+    - [19 rưỡi](time)
+    - [20 rưỡi](time)
+    - [21 rưỡi](time)
+    - [22 rưỡi](time)
+    - [23 rưỡi](time)
+    - [24 rưỡi](time)
+    - [1 rưỡi tối](time)
+    - [2 rưỡi tối](time)
+    - [3 rưỡi tối](time)
+    - [4 rưỡi tối](time)
+    - [5 rưỡi tối](time)
+    - [6 rưỡi tối](time)
+    - [7 rưỡi tối](time)
+    - [8 rưỡi tối](time)
+    - [9 rưỡi tối](time)
+    - [10 rưỡi tối](time)
+    - [11 rưỡi tối](time)
+    - [12 rưỡi tối](time)
+    - [1 rưỡi sáng](time)
+    - [2 rưỡi sáng](time)
+    - [3 rưỡi sáng](time)
+    - [4 rưỡi sáng](time)
+    - [5 rưỡi sáng](time)
+    - [6 rưỡi sáng](time)
+    - [7 rưỡi sáng](time)
+    - [8 rưỡi sáng](time)
+    - [9 rưỡi sáng](time)
+    - [10 rưỡi sáng](time)
+    - [11 rưỡi sáng](time)
+    - [12 rưỡi sáng](time)
+    - [0 giờ rưỡi](time)
+    - [1 giờ rưỡi](time)
+    - [2 giờ rưỡi](time)
+    - [3 giờ rưỡi](time)
+    - [4 giờ rưỡi](time)
+    - [5 giờ rưỡi](time)
+    - [6 giờ rưỡi](time)
+    - [7 giờ rưỡi](time)
+    - [8 giờ rưỡi](time)
+    - [9 giờ rưỡi](time)
+    - [10 giờ rưỡi](time)
+    - [11 giờ rưỡi](time)
+    - [12 giờ rưỡi](time)
+    - [13 giờ rưỡi](time)
+    - [14 giờ rưỡi](time)
+    - [15 giờ rưỡi](time)
+    - [16 giờ rưỡi](time)
+    - [17 giờ rưỡi](time)
+    - [18 giờ rưỡi](time)
+    - [19 giờ rưỡi](time)
+    - [20 giờ rưỡi](time)
+    - [21 giờ rưỡi](time)
+    - [22 giờ rưỡi](time)
+    - [23 giờ rưỡi](time)
+    - [24 giờ rưỡi](time)
+    - [1 giờ rưỡi sáng](time)
+    - [2 giờ rưỡi sáng](time)
+    - [3 giờ rưỡi sáng](time)
+    - [4 giờ rưỡi sáng](time)
+    - [5 giờ rưỡi sáng](time)
+    - [6 giờ rưỡi sáng](time)
+    - [7 giờ rưỡi sáng](time)
+    - [8 giờ rưỡi sáng](time)
+    - [9 giờ rưỡi sáng](time)
+    - [10 giờ rưỡi sáng](time)
+    - [11 giờ rưỡi sáng](time)
+    - [12 giờ rưỡi sáng](time)
+    - [1 giờ rưỡi tối](time)
+    - [2 giờ rưỡi tối](time)
+    - [3 giờ rưỡi tối](time)
+    - [4 giờ rưỡi tối](time)
+    - [5 giờ rưỡi tối](time)
+    - [6 giờ rưỡi tối](time)
+    - [7 giờ rưỡi tối](time)
+    - [8 giờ rưỡi tối](time)
+    - [9 giờ rưỡi tối](time)
+    - [10 giờ rưỡi tối](time)
+    - [11 giờ rưỡi tối](time)
+    - [12 giờ rưỡi tối](time)
+    - [00:00](time)
+    - [01:00](time)
+    - [02:00](time)
+    - [03:00](time)
+    - [04:00](time)
+    - [05:00](time)
+    - [06:00](time)
+    - [07:00](time)
+    - [08:00](time)
+    - [09:00](time)
+    - [10:00](time)
+    - [11:00](time)
+    - [12:00](time)
+    - [13:00](time)
+    - [14:00](time)
+    - [15:00](time)
+    - [16:00](time)
+    - [17:00](time)
+    - [18:00](time)
+    - [19:00](time)
+    - [20:00](time)
+    - [21:00](time)
+    - [22:00](time)
+    - [23:00](time)
+    - [24:00](time)
+    - [00:30](time)
+    - [01:30](time)
+    - [02:30](time)
+    - [03:30](time)
+    - [04:30](time)
+    - [05:30](time)
+    - [06:30](time)
+    - [07:30](time)
+    - [08:30](time)
+    - [09:30](time)
+    - [10:30](time)
+    - [11:30](time)
+    - [12:30](time)
+    - [13:30](time)
+    - [14:30](time)
+    - [15:30](time)
+    - [16:30](time)
+    - [17:30](time)
+    - [18:30](time)
+    - [19:30](time)
+    - [20:30](time)
+    - [21:30](time)
+    - [22:30](time)
+    - [23:30](time)
+    - [24:30](time)
+    - [01:00 AM](time)
+    - [02:00 AM](time)
+    - [03:00 AM](time)
+    - [04:00 AM](time)
+    - [05:00 AM](time)
+    - [06:00 AM](time)
+    - [07:00 AM](time)
+    - [08:00 AM](time)
+    - [09:00 AM](time)
+    - [10:00 AM](time)
+    - [11:00 AM](time)
+    - [12:00 AM](time)
+    - [01:00 PM](time)
+    - [02:00 PM](time)
+    - [03:00 PM](time)
+    - [04:00 PM](time)
+    - [05:00 PM](time)
+    - [06:00 PM](time)
+    - [07:00 PM](time)
+    - [08:00 PM](time)
+    - [09:00 PM](time)
+    - [10:00 PM](time)
+    - [11:00 PM](time)
+    - [12:00 PM](time)
+    - [01:30 AM](time)
+    - [02:30 AM](time)
+    - [03:30 AM](time)
+    - [04:30 AM](time)
+    - [05:30 AM](time)
+    - [06:30 AM](time)
+    - [07:30 AM](time)
+    - [08:30 AM](time)
+    - [09:30 AM](time)
+    - [10:30 AM](time)
+    - [11:30 AM](time)
+    - [12:30 AM](time)
+    - [01:30 PM](time)
+    - [02:30 PM](time)
+    - [03:30 PM](time)
+    - [04:30 PM](time)
+    - [05:30 PM](time)
+    - [06:30 PM](time)
+    - [07:30 PM](time)
+    - [08:30 PM](time)
+    - [09:30 PM](time)
+    - [10:30 PM](time)
+    - [11:30 PM](time)
+    - [12:30 PM](time)
+    - [1 giờ sáng](time)
+    - [2 giờ sáng](time)
+    - [3 giờ sáng](time)
+    - [4 giờ sáng](time)
+    - [5 giờ sáng](time)
+    - [6 giờ sáng](time)
+    - [7 giờ sáng](time)
+    - [8 giờ sáng](time)
+    - [9 giờ sáng](time)
+    - [10 giờ sáng](time)
+    - [11 giờ sáng](time)
+    - [12 giờ sáng](time)
+    - [1 giờ tối](time)
+    - [2 giờ tối](time)
+    - [3 giờ tối](time)
+    - [4 giờ tối](time)
+    - [5 giờ tối](time)
+    - [6 giờ tối](time)
+    - [7 giờ tối](time)
+    - [8 giờ tối](time)
+    - [9 giờ tối](time)
+    - [10 giờ tối](time)
+    - [11 giờ tối](time)
+    - [12 giờ tối](time)
+
+- intent: thank
+  examples: |
+    - cảm ơn
+    - cám ơn
+    - tuyệt, cảm ơn
+    - cảm ơn bạn
+    - cảm ơn rất nhiều
+    - tuyệt vời, cảm ơn
+
+- intent: user_buy_to_invest
+  examples: |
+    - Tôi muốn mua để đầu tư
+    - Tôi mua để đầu tư
+    - Mua để đầu tư
+    - Mình muốn mua để đầu tư
+    - Mình mua để đầu tư
+- intent: user_buy_to_stay
+  examples: |
+    - Tôi muốn mua để ở
+    - Tôi mua để ở
+    - Mua để ở
+    - Mình muốn mua để ở
+    - Mình mua để ở
+- intent: user_want_visit_website
+  examples: |
+    - Tôi muốn ghé website
+    - Tôi muốn ghé qua website
+    - Ghé website
+    - Qua website
+    - Website bên mình đâu
+    - Trang web của bên mình đâu
+    - Ghé trang web
+- intent: user_want_metrostar_detail
+  examples: |
+    - Giới thiệu dự án
+    - Giới thiệu dự án cho mình
+    - Chi tiết dự án
+    - Giới thiệu dự án cho tôi
+- intent: user_want_sales_policy
+  examples: |
+    - Chính sách bán hàng
+    - Chính sách bán hàng thế nào?
+    - Chính sách bán hàng như thế nào?
+    - Thông tin về chính sách bán hàng
+- intent: user_want_to_know_internal_area
+  examples: |
+    - Nội khu
+    - Nội khu như nào
+    - Nội khu thế nào
+    - Tìm hiểu nội khu
+    - Thông tin về nội khu
+- intent: user_want_to_know_investors
+  examples: |
+    - Chủ đầu tư của dự án
+    - Ai là chủ đầu tư?
+    - Ai là chủ đầu tư của dự án
+    - Thông tin về chủ đầu tư
+    - Thông tin về chủ đầu tư của dự án
+- intent: user_want_to_know_metrostar_location
+  examples: |
+    - Vị trí dự án
+    - Vị trí của dự án
+    - Dự án nằm đâu
+    - Dự án nằm ở đâu
+    - Dự án nằm ở chỗ nào
+    - Dự án ở địa chỉ nào
+    - Dự án nằm ở địa chỉ nào
+    - Địa chỉ của dự án
+- intent: user_want_to_know_metrostar_scale
+  examples: |
+    - Quy mô dự án
+    - Quy mô của dự án
+    - Dự án này quy mô thế nào
+    - Qui mô dự án
+    - Qui mô của dự án
+    - Dự án này qui mô thế nào
+- intent: user_want_to_know_progress
+  examples: |
+    - Tiến độ dự án
+    - Tiến độ dự án thế nào
+    - Tiến độ dự án đến đâu rồi
+- intent: user_ask_about_loan_procedure
+  examples: |
+    - Thủ tục vay vốn
+    - Thủ tục vay vốn như thê nào
+    - Làm sao để vay vốn
+    - Làm sao để làm thủ tục vay vốn
+    - Hướng dẫn thủ tục vay vốn
+- intent: user_ask_type_of_loan
+  examples: |
+    - Chế độ vay
+    - Các chế độ vay
+    - Chế độ cho vay
+    - Các chế độ cho vay
+- intent: user_ask_preferential_interest_rate
+  examples: |
+    - Lãi suất vay
+    - Lãi suất vay của ngân hàng
+    - Lãi suất vay ưu đãi
+    - Lãi suất vay ưu đãi của ngân hàng
+    - Lãi suất vay có được hỗ trợ
+    - Lãi suất vay có được ngân hàng hỗ trợ
+    - Lãi suất vay ưu đãi được hỗ trợ
+    - Lãi suất vay ưu đãi ngân hàng hỗ trợ
+- intent: user_ask_how_to_pay
+  examples: |
+    - Thanh toán
+    - Cách thanh toán
+    - Thanh toán như thế nào
+    - Làm sao để thanh toán
+    - Hướng dẫn thanh toán
+- intent: user_ask_amount_of_money_to_pay
+  examples: |
+    - Số tiền thanh toán
+    - Số tiền sẽ thanh toán
+    - Số tiền cần thanh toán
+    - Số tiền cần phải thanh toán
+    - Thanh toán bao nhiêu tiền
+    - Cần thanh toán bao nhiêu tiền
+    - Phải thanh toán bao nhiêu tiền
+    - Cần phải thanh toán bao nhiêu tiền
+    - Số tiền phải trả
+- intent: user_ask_flat_detail
+  examples: |
+    - Căn hộ
+    - Thông tin căn hộ
+    - Căn hộ trônng như thế nào
+- intent: user_ask_shophouse_detail
+  examples: |
+    - shophouse
+    - Shophouse
+    - Thông tin shophouse
+    - shophouse trônng như thế nào
+    - Shophouse trônng như thế nào
+- intent: user_ask_utility_detail
+  examples: |
+    - Tiện ích
+    - Các loại tiện ích
+    - Tiện ích có gì
+- intent: user_need_consultation
+  examples: |
+    - Tư vấn
+    - Tư vấn ngay
+    - Tư vấn thêm
+    - Tôi cần tư vấn
+    - Tôi cần tư vấn thêm
+    - Mình cần tư vấn
+    - Mình cần tư vấn thêm
+    - Tư vấn cho tôi
+    - Tư vấn cho mình
+    - Tư vấn thêm cho tôi
+    - Tư vấn thêm cho mình
+    - Tư vấn ngay cho tôi
+    - Tư vấn ngay cho mình
+- intent: user_register_to_visit_sample_house
+  examples: |
+    - Đăng ký xem nhà mẫu
+    - Tôi muốn đăng ký xem nhà mẫu
+    - Tôi muốn đi xem nhà mẫu
+    - Mình muốn đăng ký xem nhà mẫu
+    - Mình muốn đi xem nhà mẫu
+    - Làm sao để đăng ký xem nhà mẫu
+    - Tôi muốn đi xem nhà mẫu
+    - Mình muốn đi xem nhà mẫu
+
+- intent: user_ask_legal_docs
+  examples: |
+    - Giấy tờ pháp lý
+    - Pháp lý của dự án
+    - Giấy tờ pháp lý của dự án
+    - Giấy tờ pháp lí
+    - Pháp lí của dự án
+    - Giấy tờ pháp lí của dự án
+
+- intent: user_ask_raise_capital_letter
+  examples: |
+    - Công văn huy động vốn
+    - Giấy tờ huy động vốn
+    - Thông tin huy động vốn
+
+- intent: user_ask_construction_permit
+  examples: |
+    - Giấy phép xây dựng
+    - Thông tin giấy phép xây dựng
+
+- intent: user_ask_30_floors_construction_permit
+  examples: |
+    - Giấy phép xây dựng 30 tầng
+    - Thông tin giấy phép xây dựng 30 tầng
+
+- intent: user_ask_sale_contract_signning_condition
+  examples: |
+    - Hợp đồng mua bán
+    - Hợp đồng mua bán mẫu
+    - Ký hợp đồng mua bán
+    - Điều kiện ký hợp đồng mua bán
+    - Điều kiện để được ký hợp đồng mua bán
+
+- intent: user_ask_apt_hand_over_time
+  examples: |
+    - Thời điểm bàn giao nhà
+    - Thời gian bàn giao nhà
+    - Thời điểm dự kiến bàn giao nhà
+    - Thời gian dự kiến bàn giao nhà
+
+- intent: user_ask_bank_guarantee
+  examples: |
+    - Bảo lãnh ngân hàng
+    - Ngân hàng bảo lãnh bàn giao
+    - Phí bảo lãnh bàn giao
+    - Mức phí bảo lãnh bàn giao
+    - Phí bảo lãnh bàn giao của ngân hàng
+    - Mức phí bảo lãnh bàn giao của ngân hàng
+
+- intent: user_ask_sale_contract_signning_procedure
+  examples: |
+    - Thủ tục ký kết
+    - Thủ tục kí kết
+    - Thủ tục ký kết hợp đồng
+    - Thủ tục kí kết hợp đồng
+    - Thủ tục ký kết hợp đồng mua bán
+    - Thủ tục kí kết hợp đồng mua bán
+
+- intent: user_ask_sale_contract_signning_time
+  examples: |
+    - Thời gian ký kết hợp đồng
+    - Thời gian kí kết hợp đồng
+    - Thời gian ký kết hợp đồng mua bán
+    - Thời gian kí kết hợp đồng mua bán
+
+- intent: user_ask_sale_contract_signning_file
+  examples: |
+    - Hồ sơ ký kết hợp đồng
+    - Hồ sơ kí kết hợp đồng
+    - Hồ sơ ký kết hợp đồng mua bán
+    - Hồ sơ kí kết hợp đồng mua bán
+
+- intent: user_want_edit_sale_contract_signning_file
+  examples: |
+    - Thay đổi thông tin hợp đồng
+    - Thay đổi thông tin hợp đồng mua bán
+    - Sửa thông tin hợp đồng
+    - Sửa đổi thông tin hợp đồng mua bán
+    - Chỉnh sửa thông tin hợp đồng
+    - Chỉnh sửa thông tin hợp đồng mua bán
+    - Chỉnh sửa nội dung hợp đồng
+    - Chỉnh sửa nội dung hợp đồng mua bán
+
+- intent: user_ask_sale_contract_transfer_procedure
+  examples: |
+    - Thủ tục chuyển nhượng hợp đồng
+    - Thủ tục chuyển nhượng hợp đồng mua bán
+    - Làm sao để chuyển nhượng hợp đồng
+    - Làm sao để chuyển nhượng hợp đồng mua bán
+    - Cách chuyển nhượng hợp đồng
+    - Cach chuyển nhượng hợp đồng mua bán
+
+- intent: user_ask_sale_contract_transfer_file
+  examples: |
+    - Hồ sơ chuyển nhượng
+    - Hồ sơ chuyển nhượng hợp đồng
+    - Hồ sơ hợp đồng chuyển nhượng
+    - Danh mục hồ sơ chuyển nhượng hợp đồng
+    - Danh mục hồ sơ hợp đồng chuyển nhượng
+    - Hồ sơ chuyển nhượng hợp đồng mua bán
+    - Danh mục hồ sơ chuyển nhượng
+    - Danh mục hồ sơ chuyển nhượng hợp đồng mua bán
+
+- intent: user_ask_sale_contract_transfer_fee
+  examples: |
+    - Phí chuyển nhượng hợp đồng
+    - Mức phí chuyển nhượng hợp đồng
+    - Phí chuyển nhượng hợp đồng mua bán
+    - Mức phí chuyển nhượng hợp đồng mua bán
+
+- intent: user_ask_liquidation_procedure
+  examples: |
+    - Thủ tục thanh lý
+    - Thủ tục thanh lí
+    - Tôi muốn thanh lý
+    - Tôi muốn thanh lí
+    - Khách hàng nước ngoài muốn thanh lý
+    - Khách hàng nước ngoài muốn thanh lí
+    - Khách hàng là người nước ngoài muốn thanh lý
+    - Khách hàng là người nước ngoài muốn thanh lí
+
+- intent: user_ask_liquidation_file
+  examples: |
+    - Hồ sơ thanh lý
+    - Hồ sơ thanh lí
+
+- intent: user_ask_when_they_get_money_after_liquidation
+  examples: |
+    - Thời gian nhận tiền sau thanh lý
+    - Thời gian nhận tiền sau khi thanh lý
+    - Thời gian nhận tiền sau thanh lí
+    - Thời gian nhận tiền sau khi thanh lí
+    - Lúc nào nhận tiền sau thanh lý
+    - Lúc nào nhận tiền sau khi thanh lý
+    - Khi nào nhận tiền sau thanh lý
+    - Khi nào nhận tiền sau khi thanh lý
+
+- intent: user_ask_operation_management_fee
+  examples: |
+    - Phí quản lý
+    - Phí quản lí
+    - Phí quản lý vận hành
+    - Phí quản lí vận hành
+
+- intent: user_ask_parking_lot
+  examples: |
+    - Chỗ đỗ xe
+    - Chỗ đỗ xe máy
+    - Chỗ đỗ xe 2 banh
+    - Chỗ đỗ xe hơi
+    - Chỗ đỗ xe ô tô
+    - Chỗ đỗ xe 4 bánh
+    - Chỗ đậu xe
+    - Chỗ đậu xe máy
+    - Chỗ đậu xe 2 banh
+    - Chỗ đậu xe hơi
+    - Chỗ đậu xe ô tô
+    - Chỗ đậu xe 4 bánh

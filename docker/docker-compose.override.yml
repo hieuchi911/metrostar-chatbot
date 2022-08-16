@@ -1,0 +1,18 @@
+version: "3.4"
+
+x-rasa-services: &default-rasa-service
+  image: "namhoai167/rasa-2.8.14-underthesea-tokenizer:latest"
+  
+services:
+  rasa-production:
+    <<: *default-rasa-service
+    volumes:
+       - ./custom_components:/app/custom_components
+
+  rasa-worker:
+    <<: *default-rasa-service
+    volumes:
+       - ./custom_components:/app/custom_components
+        
+  app:
+    image: "namhoai167/action_server_metrostar:060cd1ec13f631192da9c88f0bdc4ca2898bfa5e"

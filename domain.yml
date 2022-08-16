@@ -1,0 +1,676 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- bot_challenge
+- complain
+- user_give_name
+- user_give_email
+- user_give_phone_number
+- user_give_date
+- user_give_time
+- subscribe
+- thank
+- user_buy_to_invest
+- user_buy_to_stay
+- user_want_visit_website
+- user_want_metrostar_detail
+- user_want_sales_policy
+- user_want_to_know_internal_area
+- user_want_to_know_investors
+- user_want_to_know_metrostar_location
+- user_want_to_know_metrostar_scale
+- user_want_to_know_progress
+- user_ask_about_loan_procedure
+- user_ask_type_of_loan
+- user_ask_preferential_interest_rate
+- user_ask_how_to_pay
+- user_ask_amount_of_money_to_pay
+- user_ask_flat_detail
+- user_ask_shophouse_detail
+- user_ask_utility_detail
+- user_need_consultation
+- user_register_to_visit_sample_house
+- user_ask_legal_docs
+- user_ask_raise_capital_letter
+- user_ask_construction_permit
+- user_ask_30_floors_construction_permit
+- user_ask_sale_contract_signning_condition
+- user_ask_apt_hand_over_time
+- user_ask_bank_guarantee
+- user_ask_sale_contract_signning_procedure
+- user_ask_sale_contract_signning_time
+- user_ask_sale_contract_signning_file
+- user_want_edit_sale_contract_signning_file
+- user_ask_sale_contract_transfer_procedure
+- user_ask_sale_contract_transfer_file
+- user_ask_sale_contract_transfer_fee
+- user_ask_liquidation_procedure
+- user_ask_liquidation_file
+- user_ask_when_they_get_money_after_liquidation
+- user_ask_operation_management_fee
+- user_ask_parking_lot
+- nlu_fallback
+
+entities:
+- name
+- email
+- phone_number
+- time
+- date
+
+slots:
+  name_entered:
+    type: bool
+    influence_conversation: False
+  name:
+    type: text
+    influence_conversation: False
+  email:
+    type: text
+  phone_number:
+    type: text
+  visit_time:
+    type: text
+  visit_date:
+    type: text
+  page_name:
+    type: text
+    initial_value: "Metro Star Chatbot"
+
+responses:
+  utter_welcome:
+  - text: Chào đằng ấy! Mình là {page_name}. Mình vẫn đang học hỏi để thông minh hơn, nên có lỗi gì thì mong bạn thông cảm.
+  - text: "{page_name} xin chào, chúng tôi có thể giúp gì cho bạn"
+  utter_metrostar_basic_info:
+  - text: |-
+      METRO STAR - KẾT NỐI TRỌN TINH HOA
+      Metro Star là dự án sở hữu vị trí đắc địa tại TP. Thủ Đức, tọa lạc tại vòng xoay lớn nhất trên Xa lộ Hà Nội - Đại lộ đẹp nhất của phía Đông Sài Gòn, tại khu dân cư đông đúc, sầm uất và ngay điểm kết nối với Vành đai 2 qua Phạm Văn Đồng và Mai Chí Thọ. 
+      Metro Star với thiết kế chuẩn Singapore cùng 100+ sao tiện ích, đáp ứng hoàn mỹ một cuộc sống sang trọng, hiện đại.
+    buttons:
+    - title: "Đầu tư"
+      payload: "Tôi muốn mua để đầu tư"
+    - title: "Mua để ở"
+      payload: "Tôi muốn mua để ở"
+    - title: "Qua trang web"
+      payload: "Tôi muốn qua trang web"
+  utter_greet:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "Xin chào {name}!"
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "Chào {name}"
+  - text: Xin chào
+  - text: Xin chào!
+  - text: Chào đằng ấy
+  - text: Chào bạn
+  utter_goodbye:
+  - text: Tạm biệt
+  - text: Cáo từ
+  utter_iamabot:
+  - text: Tôi là bot nha :3
+  - text: Mình là bot
+  utter_urwelcome:
+  - text: Không có gì
+  - text: Không có gì. Đừng bận tâm
+  - text: Mình rất vui vì đã giúp được bạn
+  - text: Tôi rất vui vì đã giúp được bạn
+  utter_handle_complain:
+  - text: |-
+      Xin lỗi Quý khách hàng vì trải nghiệm không vui này. 
+      Cảm ơn Quý khách hàng đã phản hồi thông tin, Dự án xin ghi nhận ý kiến đóng góp của Quý khách hàng để hoàn thiện và xây dựng chất lượng ngày một tốt hơn ạ. 
+      Anh/Chị vui lòng cho {page_name} xin số điên thoại của mình ạ, nhân viên chăm sóc khách hàng Dự án sẽ liên hệ và giải quyết thắc mắc của Anh/Chị trong thời gian sớm nhất ạ.
+    buttons:
+    - title: "Tìm hiểu thêm"
+      payload: "Ghé website"
+  
+  utter_metrostar_invest_info:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: |-
+      Metro Star - CƠ HỘI ĐẦU TƯ KHÔNG THỂ BỎ QUA
+      Shophouse Metro Star đang được săn đón ráo riết vì luôn đem lại lợi nhuận lớn cho khách bởi vị trí đẹp và lợi thế kết nối ga Metro. Trên thế giới, những căn shophouse kết nối trực tiếp ga Metro luôn có chỉ số sinh lời rất nhanh, đặc biệt là Nhật Bản.
+      Quý khách hàng {name} đang quan tâm tới thông tin nào của dự án ạ? Để {page_name} tư vấn thêm cho mình nhé.
+    buttons:
+    - title: "Giới thiệu dự án"
+      payload: "Giới thiệu dự án cho mình"
+    - title: "Chính sách bán hàng"
+      payload: "Chính sách bán hàng thế nào?"
+    - title: "Tìm hiểu nội khu"
+      payload: "Nội khu như nào"
+  - text: |-
+      Metro Star - CƠ HỘI ĐẦU TƯ KHÔNG THỂ BỎ QUA
+      Shophouse Metro Star đang được săn đón ráo riết vì luôn đem lại lợi nhuận lớn cho khách bởi vị trí đẹp và lợi thế kết nối ga Metro. Trên thế giới, những căn shophouse kết nối trực tiếp ga Metro luôn có chỉ số sinh lời rất nhanh, đặc biệt là Nhật Bản.
+      Quý khách hàng đang quan tâm tới thông tin nào của dự án ạ? Để {page_name} tư vấn thêm cho mình nhé.
+    buttons:
+    - title: "Giới thiệu dự án"
+      payload: "Giới thiệu dự án cho mình"
+    - title: "Chính sách bán hàng"
+      payload: "Chính sách bán hàng thế nào?"
+    - title: "Tìm hiểu nội khu"
+      payload: "Nội khu như nào"
+  
+  utter_detail_for_user_buy_to_stay:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{page_name} xin chào Quý khách hàng {name}! Mời Anh/chị tham khảo thông tin chi tiết về căn hộ của chúng tôi qua các nút bấm bên dưới nhé!"
+    buttons:
+    - title: "Tìm hiểu nội khu"
+      payload: "Nội khu như nào"
+    - title: "Chính sách bán hàng"
+      payload: "Chính sách bán hàng thế nào?"
+    - title: "Tiến độ dự án"
+      payload: "Tiến độ dự án thế nào"
+  - text: "{page_name} xin chào Quý khách hàng! Mời Anh/chị tham khảo thông tin chi tiết về căn hộ của chúng tôi qua các nút bấm bên dưới nhé!"
+    buttons:
+    - title: "Tìm hiểu nội khu"
+      payload: "Nội khu như nào"
+    - title: "Chính sách bán hàng"
+      payload: "Chính sách bán hàng thế nào?"
+    - title: "Tiến độ dự án"
+      payload: "Tiến độ dự án thế nào"
+  utter_website:
+  - text: https://metrostar.vn/
+  utter_metrostar_details:
+  - text: |-
+      -Lấy cảm hứng từ Gardens by the Bay của Singapore, Metro Star mô phỏng lại 7 kỳ quan thiên nhiên xanh mát nhằm mang đến không gian sống xanh, thoải mái và hiện đại.
+      -Trong khuôn viên dự án, các khu vườn trên cao tạo sự xanh mướt kết hợp với những hồ nước mát, bể sục... giúp cân bằng độ ẩm và thanh lọc không khí cho không gian trở nên trong lành.
+      -Các căn hộ Metro Star thiết kế theo phong cách chuẩn Singapore, hướng đến cuộc sống xanh, năng động và hiện đại.
+    buttons:
+    - title: "Chủ đầu tư"
+      payload: "Chủ đầu tư của dự án"
+    - title: "Vị trí dự án"
+      payload: "Vị trí dự án"
+    - title: "Quy mô dự án"
+      payload: "Quy mô của dự án"
+  utter_investors:
+  - text: Chủ đầu tư Metro Star là Công ty TNHH Đầu Tư Metro Star.
+    buttons:
+    - title: "Tìm hiểu nội khu"
+      payload: "Nội khu như nào"
+    - title: "Chính sách bán hàng"
+      payload: "Thông tin về chính sách bán hàng"
+    - title: "Tiến độ dự án"
+      payload: "Tiến độ dự án thế nào"
+
+  utter_metrostar_scale:
+  - text: |-
+      -Tên dự án: Metro Star
+      -Địa chỉ: 360 Xa Lộ Hà Nội, TP. Thủ Đức, TP.HCM.
+      -Tổng diện tích đất: 18.337,5m2
+      -Mật độ xây dựng: 55%
+      -Quy mô: 
+      + 1.468 căn hộ thương mại sở hữu vĩnh viễn:
+      + Tower 1: 30 tầng & 2 hầm đậu xe;
+      + Tower 2: 30 tầng & 2 hầm đậu xe;
+      + 02 tầng Shop house và các dịch vụ khác
+      -Chủ đầu tư: Công ty TNHH Đầu Tư Metro Star
+      -Loại hình: Shophouse và căn hộ
+    buttons:
+    - title: "Tìm hiểu nội khu"
+      payload: "Thông tin về nội khu"
+    - title: "Chính sách bán hàng"
+      payload: "Thông tin về chính sách bán hàng"
+    - title: "Tiến độ dự án"
+      payload: "Tiến độ dự án đến đâu rồi"
+  
+  utter_sales_policy:
+  - text: "Ngân hàng dự kiến sẽ hỗ trợ cho vay lên đến 70%, bao gồm các ngân hàng [MB, NAB, BIDV, Vpbank, MSB… hoặc ngân hàng khác hoạt động hợp pháp tại Việt Nam] cùng với nhiều các ưu đãi & chính sách hấp dẫn như: lãi suất ưu đãi, phương thức trả nợ phù hợp, linh hoạt..."
+    buttons:
+    - title: "Thủ tục vay vốn"
+      payload: "Thủ tục vay vốn"
+    - title: "Thanh toán"
+      payload: "Cách thanh toán"
+  
+  utter_type_of_loan:
+  - text: |-
+      Chế độ vay
+      - KH được vay Ngân hàng để thanh toán cho Căn Hộ theo HĐMB.
+      - Thực hiện thủ tục vay theo thủ tục của Ngân hàng. 
+      - Các Ngân hàng cho vay: MB, NAB, BIDV, VPBank, MSB hoặc ngân hàng khác hoạt động hợp pháp tại Việt Nam. 
+      - Chủ đầu tư là đầu mối liên kết giữa khách hàng và ngân hàng.
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Tôi cần tư vấn thêm"
+    - title: "Lãi suất vay ưu đãi"
+      payload: "Lãi suất vay ưu đãi"
+
+  utter_preferential_interest_rate:
+  - text: "Ngân hàng dự kiến sẽ hỗ trợ cho vay lên đến 70%, bao gồm các ngân hàng [MB, NAB, BIDV, Vpbank, MSB… hoặc ngân hàng khác hoạt động hợp pháp tại Việt Nam] cùng với nhiều các ưu đãi & chính sách hấp dẫn như: lãi suất ưu đãi, phương thức trả nợ phù hợp, linh hoạt..."
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Tôi cần tư vấn thêm"
+    - title: "Chế độ vay"
+      payload: "Chế độ vay"
+  
+  utter_internal_area:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: |-
+      Sản phẩm của dự án Metro Star là Căn hộ và Shophouse bao gồm:
+      - Tower 1: 30 tầng & 2 hầm đậu xe;
+      - Tower 2: 30 tầng & 2 hầm đậu xe;
+      - 02 tầng Shop house và các dịch vụ khác.
+      Mời quý khách {name} tìm hiểu loại hình mình quan tâm trong các nút bấm bên dưới nhé!
+    buttons:
+    - title: "Căn hộ"
+      payload: "Căn hộ"
+    - title: "Shophouse"
+      payload: "Shophouse"
+    - title: "Tiện ích"
+      payload: "Tiện ích"
+  - text: |-
+      Sản phẩm của dự án Metro Star là Căn hộ và Shophouse bao gồm:
+      - Tower 1: 30 tầng & 2 hầm đậu xe;
+      - Tower 2: 30 tầng & 2 hầm đậu xe;
+      - 02 tầng Shop house và các dịch vụ khác.
+      Mời quý khách tìm hiểu loại hình mình quan tâm trong các nút bấm bên dưới nhé!
+    buttons:
+    - title: "Căn hộ"
+      payload: "Căn hộ"
+    - title: "Shophouse"
+      payload: "Shophouse"
+    - title: "Tiện ích"
+      payload: "Tiện ích"
+  
+  utter_flat_detail:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: |-
+      Thiết kế căn hộ đa phong cách khẳng định cá tính riêng
+      Dự án được thiết kế gồm nhiều nhóm căn hộ từ 2 - 3 phòng ngủ với diện tích dao động từ 55 - 74m2. Mỗi căn hộ đều được trau chuốt tỉ mỉ với môi trường sống lành mạnh gần gũi thiên nhiên - là nơi các thế hệ cư dân Metro Star an cư và vun đắp cho thế hệ tiếp nối.
+      Mời quý khách hàng {name} kéo trượt sang ngang để thăm quan các phòng của căn hộ qua những hình ảnh dưới đây!
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Tôi cần tư vấn"
+  - text: |-
+      Thiết kế căn hộ đa phong cách khẳng định cá tính riêng
+      Dự án được thiết kế gồm nhiều nhóm căn hộ từ 2 - 3 phòng ngủ với diện tích dao động từ 55 - 74m2. Mỗi căn hộ đều được trau chuốt tỉ mỉ với môi trường sống lành mạnh gần gũi thiên nhiên - là nơi các thế hệ cư dân Metro Star an cư và vun đắp cho thế hệ tiếp nối.
+      Mời quý khách hàng kéo trượt sang ngang để thăm quan các phòng của căn hộ qua những hình ảnh dưới đây!
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Tôi cần tư vấn"
+  
+  utter_shophouse_detail:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: |-
+      Lấy cảm hứng từ Myeongdong-Thiên đường mua sắm tại Seoul-Hàn Quốc. Tại Metro Star, khách hàng có thể thỏa thích mua sắm với hàng trăm thương hiệu đến từ các quốc gia khác nhau trên Thế giới.
+      - Tổng số shophouse: 76 căn
+      - Diện tích trung bình:
+      Tháp 1: Từ 69-225 m2 (45 Căn)
+      Tháp 2: Từ 35-310 m2 (31 Căn)
+      Tầng 3 - Tháp 2: Khu chợ Grand Bazaar 3.007 m2
+      Mời quý khách hàng {name} kéo trượt sang ngang để thăm quan hình ảnh phối cảnh shophouse nhé!
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Mình cần tư vấn"
+  - text: |-
+      Lấy cảm hứng từ Myeongdong-Thiên đường mua sắm tại Seoul-Hàn Quốc. Tại Metro Star, khách hàng có thể thỏa thích mua sắm với hàng trăm thương hiệu đến từ các quốc gia khác nhau trên Thế giới.
+      - Tổng số shophouse: 76 căn
+      - Diện tích trung bình:
+      Tháp 1: Từ 69-225 m2 (45 Căn)
+      Tháp 2: Từ 35-310 m2 (31 Căn)
+      Tầng 3 - Tháp 2: Khu chợ Grand Bazaar 3.007 m2
+      Mời quý khách hàng kéo trượt sang ngang để thăm quan hình ảnh phối cảnh shophouse nhé!
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Mình cần tư vấn"
+  
+  utter_metrostar_progress:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: |-
+      DỰ ÁN METRO STAR
+      Chất lượng xây dựng Metro Star được giám sát chặt chẽ bởi đơn vị Giám sát quốc tế Apave - thương hiệu từ năm 1867 của Cộng hòa Pháp, đảm bảo thi công chính xác tuyệt đối theo thiết kế của Axis - Nhà thiết kế hàng đầu của Singapore.
+      Mời Quý khách {name} tìm hiểu chi tiết về tiến độ xây dựng của dự án tại đường dẫn: https://metrostar.vn/tien-do
+  - text: |-
+      DỰ ÁN METRO STAR
+      Chất lượng xây dựng Metro Star được giám sát chặt chẽ bởi đơn vị Giám sát quốc tế Apave - thương hiệu từ năm 1867 của Cộng hòa Pháp, đảm bảo thi công chính xác tuyệt đối theo thiết kế của Axis - Nhà thiết kế hàng đầu của Singapore.
+      Mời Quý khách tìm hiểu chi tiết về tiến độ xây dựng của dự án tại đường dẫn: https://metrostar.vn/tien-do
+    buttons:
+    - title: "Tư vấn ngay"
+      payload: "Mình cần tư vấn thêm"
+
+  utter_construction_permit:
+  - text: Dự án được miễn GPXD theo điều 2 Quyết định 73/QĐ-SXD-PTN ngày 14/07/2008 về Phê duyệt dự án đầu tư xây dựng và khoản 3 điều 9, điều 15 Nghị Định 90/2006/NĐ-CP ngày 06/09/2006 của Chính phủ về hướng dẫn thi hành Luật nhà ở. Theo Nghị định 90/2006/NĐ-CP thì Quyết định này thay cho GPXD.
+    buttons:
+    - title: "Pháp lý của dự án"
+      payload: "Giấy tờ pháp lý của dự án"
+    - title: "Công văn huy động vốn"
+      payload: "Công văn huy động vốn"
+    - title: "Giấy phép xây dựng 30 tầng"
+      payload: "Giấy phép xây dựng 30 tầng"
+
+  utter_apt_hand_over_time:
+  - text: |-
+      Trong thời điểm hiện tại, do diễn biến dịch COVID-19 phức tạp, tiến độ xây dựng dự kiến có thể thay đổi. Chủ đầu tư vẫn luôn cố gắng bám sát tiến độ mẫu. Trong trường hợp có thay đổi, chủ đầu tư sẽ gửi thông báo tiến độ dự kiến bàn giao mới bằng văn bản cho khách hàng ạ.
+      Ban QLDA dự kiến quý 1 năm 2022 giao nhà
+      Trường hợp bàn giao chậm thì sẽ áp dụng theo các quy định tại Hợp đồng.
+
+  utter_sale_contract_signning_procedure:
+  - text: |-
+      Thủ tục kí kết: 
+      - KH ký thanh lý thỏa thuận Đảm Bảo Ký Hợp Đồng Mua Bán.
+      - Tiếp theo KH Ký HĐMB và hoàn tất thủ tục.
+      Theo quy định của pháp luật hiện hành thì cả hai vợ chồng (hoặc) chỉ vợ (hoặc) chồng ký HĐMB đều được. Tuy nhiên, KH ghi chú giúp CĐT một số điểm như sau: 
+      (1) Khi tiến hành thủ tục vay thì Ngân hàng sẽ bắt buộc là hai vợ chồng.
+      (2) Khi tiến hành chuyển nhượng HĐMB hoặc các giao dịch khác liên quan đến tài sản/quyền tài sản đối với Căn hộ thì bắt buộc phải có hai vợ chồng.
+    buttons:
+    - title: "Thời gian ký kết"
+      payload: "Thời gian ký kết hợp đồng mua bán"
+    - title: "Hồ sơ ký kết"
+      payload: "Hồ sơ ký kết hợp đồng mua bán"
+    - title: "Thay đổi thông tin hợp đồng"
+      payload: "Thay đổi thông tin hợp đồng mua bán"
+
+  utter_sale_contract_signning_file:
+  - text: |-
+      Hồ sơ mua bán cung cấp cho khách ký bao gồm:
+      - 04 bản Hợp đồng mua bán.
+      - 04 bản BB thanh lý TTDBKKHD.
+      - 02 Biên bản chuyển giao
+      - Phiếu xác nhận thông tin KH v/v Ký kết HĐMB
+    buttons:
+    - title: "Thủ tục ký kết"
+      payload: "Thủ tục ký kết hợp đồng mua bán"
+    - title: "Thời gian ký kết"
+      payload: "Thời gian ký kết hợp đồng mua bán"
+    - title: "Thay đổi thông tin hợp đồng"
+      payload: "Thay đổi thông tin hợp đồng mua bán"
+  utter_edit_sale_contract_signning_file:
+  - text: |-
+      Những trường hợp khách yêu cầu thay đổi thông tin của khách hàng thì phải có văn bản khách ký xác nhận gửi đến Chủ Đầu Tư, không xác nhận qua hotline và email.
+      Việc này là để bảo vệ quyền lợi của khách trong việc thông tin giao dịch.
+      Nếu những thông tin thay đổi được ghi nhận tại Hợp đồng thì phải lập thành phụ lục
+      HĐ mẫu sẽ không được sửa đối với từng khách hàng nhằm đảm bảo tính thống nhất cho toàn Dự Án và đảm bảo mẫu đã được duyệt.
+    buttons:
+    - title: "Thủ tục ký kết"
+      payload: "Thủ tục ký kết hợp đồng mua bán"
+    - title: "Thời gian ký kết"
+      payload: "Thời gian ký kết hợp đồng mua bán"
+    - title: "Hồ sơ ký kết"
+      payload: "Hồ sơ ký kết hợp đồng mua bán"
+
+  utter_sale_contract_transfer_fee:
+  - text: |-
+      Theo quy định, CĐT sẽ không được thu bất kỳ khoản phí nào phát sinh khi KH chuyển nhượng HĐMB. Tuy nhiên, CĐT sẽ thu phí hỗ trợ hồ sơ là 0,5% GTHĐ (chưa VAT)
+      - Theo chính sách của CĐT, nhằm hạn chế tình trạng cạnh tranh ép giá trong chuyển nhượng, CĐT quy định chuyển nhượng thông qua sàn giao dịch chuyên nghiệp của CĐT.
+      - CĐT hỗ trợ mua lại theo thỏa thuận hai Bên hoặc cung cấp khách hàng tiềm năng để nhận chuyển nhượng.
+      - Mức phí vẫn là 0.5% bao gồm phí môi giới và thủ tục làm hồ sơ
+    buttons:
+    - title: "Thủ tục chuyển nhượng"
+      payload: "Thủ tục chuyển nhượng hợp đồng mua bán"
+    - title: "Hồ sơ chuyển nhượng"
+      payload: "Hồ sơ chuyển nhượng hợp đồng mua bán"
+
+  utter_liquidation_file:
+  - text: |-
+      Tại thời điểm ký Thỏa Thuận Chấm Dứt này, Bên B phải bàn giao lại cho Bên A đầy đủ và chính xác các hồ sơ sau:
+      (1) Bản gốc Phiếu Giữ Chỗ Không Hoàn Lại;
+      (2) Bản gốc Thỏa Thuận Đảm Bảo Ký Kết Hợp Đồng và các phụ lục đính kèm;
+      (3) Bản gốc các Thông Báo và Phiếu Thu do Bên A phát hành (nếu có);
+      (4) Bản gốc các Giấy Xác Nhận Thông Tin Chuyển Tiền do Bên A phát hành (nếu có);
+      (5) CMND/Hộ chiếu và Hộ khẩu của Bên B (01 bản sao y, chứng thực);
+      (6) Nếu vợ chồng cùng đi, đem theo đủ CMND/CCCD và Giấy ĐK kết hôn hoặc Hộ Khẩu) (bản gốc).
+    buttons:
+    - title: "Thủ tục thanh lý"
+      payload: "Thủ tục thanh lý"
+    - title: "Thời gian nhận tiền"
+      payload: "Thời gian nhận tiền sau thanh lý"
+  utter_money_after_liquidation:
+  - text: Nếu KH muốn thanh lý thì quy định nhận lại tiền và lãi suất sẽ được thực hiện theo quy định tại Hợp đồng
+    buttons:
+    - title: "Thủ tục thanh lý"
+      payload: "Thủ tục thanh lý"
+    - title: "Hồ sơ thanh lý"
+      payload: "Hồ sơ thanh lý"
+  utter_operation_management_fee:
+  - text: |-
+      Phí quản lý vận hành sẽ được tính toán kỹ tại thời điểm Dự Án hoàn thành và đi vào quản lý vận hành căn cứ vào các yếu tố: 
+      (1) Phí Quản lý bằng phí bình quân 10 khu Chung cư cao cấp trong khu vực lân cận
+      (2) Phù hợp với quy định pháp luật tại thời điểm ban hành (nếu có); 
+      (3) Phù hợp với khu vực xung quanh;
+      (4) Phù hợp với số lượng, tiêu chí của cư dân, diện tích Dự Án, tổng số căn hộ;
+      (5) Phù hợp với tiện ích thực tế có trong Dự Án. 
+      Chủ đầu tư luôn đảm bảo bảo hài hòa lợi ích cho cư dân và đơn vị quản lý vận hành nhằm đạt chất lượng quản lý tốt, an ninh, an toàn cho cư dân.
+    buttons:
+    - title: "Chỗ đậu xe"
+      payload: "Chỗ đậu xe"
+    - title: "Tư vấn thêm"
+      payload: "Tư vấn thêm cho tôi"
+  utter_parking_lot:
+  - text: |-
+      Chủ đầu tư sẽ đảm bảo mỗi căn hộ được cung cấp 02 chỗ đỗ xe máy, Phí giữ xe theo quy định chung, do đơn vị quản lý vận hành nhà xe thu. 
+      Đối với chỗ để xe ô tô dành cho các chủ sở hữu nhà chung cư thì thực hiện theo quy định tại điểm b khoản 1 Điều 101 Luật Nhà ở 2014, theo đó KH có thể mua hoặc thuê chỗ đậu xe; trường hợp không mua hoặc không thuê thì chỗ để xe ô tô này thuộc quyền quản lý của chủ đầu tư. Việc bố trí chỗ để xe ô tô của khu nhà chung cư sẽ bảo đảm nguyên tắc ưu tiên cho các chủ sở hữu nhà chung cư trước sau đó mới dành chỗ để xe công cộng.
+    buttons:
+    - title: "Phí quản lý vận hành"
+      payload: "Phí quản lý vận hành"
+  utter_ask_name:
+  - text: Tên của bạn là gì?
+  - text: Bạn tên gì nhỉ?
+  - text: Tên bạn là gì?
+  - text: Bạn cho mình biết tên bạn nào
+  - text: Bạn vui lòng cho biết bạn tên gì?
+  - text: Tên của bạn là gì?
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_email
+        title:
+        payload:
+      - content_type: user_phone_number
+        title:
+        payload:
+  - text: Bạn tên gì nhỉ?
+    channel: "facebook"
+  - text: Tên bạn là gì?
+    channel: "facebook"
+  - text: Bạn cho mình biết tên bạn nào
+    channel: "facebook"
+  - text: Bạn vui lòng cho biết bạn tên gì?
+    channel: "facebook"
+  
+  utter_ask_email:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Email của {name} là gì?
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_email
+        title:
+        payload: 
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} cho mình xin email của {name} nha"
+  - text: Email của {name} là gì?
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_email
+        title:
+        payload: 
+  - text: "{name} cho mình xin email của {name} nha"
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_email
+        title:
+        payload: 
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Email của {name} là gì?
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} cho mình xin email của {name} nha"
+  - text: Email của bạn là gì?
+  - text: "Bạn cho mình xin email của bạn nha"
+  
+  utter_ask_phone_number:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Số điện thoại của {name} là gì?
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_phone_number
+        title:
+        payload:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} cho mình xin số điện thoại của {name} nhé"
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_phone_number
+        title:
+        payload:
+  - text: Số điện thoại của bạn là gì?
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_phone_number
+        title:
+        payload:
+  - text: "Bạn cho mình xin số điện thoại của bạn nhé"
+    channel: "facebook"
+    quick_replies:
+      - content_type: user_phone_number
+        title:
+        payload:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Số điện thoại của {name} là gì?
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} cho mình xin số điện thoại của {name} nhé"
+  - text: Số điện thoại của bạn là gì?
+  - text: "Bạn cho mình xin số điện thoại của bạn nhé"
+
+  
+  utter_ask_visit_time:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} sẽ đến vào giờ nào?"
+  - text: Bạn sẽ đến vào giờ nào?
+  
+  utter_ask_visit_date:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: "{name} sẽ đến vào ngày nào?"
+  - text: Bạn sẽ đến vào ngày nào?
+  
+  utter_for_fallback:
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Ồ, có vẻ như mình chưa có câu trả lời phù hợp cho câu này. Đội ngũ phát triển sẽ cập nhật câu này vào dữ liệu sau. Trong lúc này {name} có thể kiểm tra lại câu của {name} có dấu thanh chưa hay có lỗi chính tả không, vì đó có thể là lý do mình chưa hiểu.
+  - text: Ồ, có vẻ như mình chưa có câu trả lời phù hợp cho câu này. Đội ngũ phát triển sẽ cập nhật câu này vào dữ liệu sau. Trong lúc này bạn có thể kiểm tra lại câu của bạn có dấu thanh chưa hay có lỗi chính tả không, vì đó có thể là lý do mình chưa hiểu.
+  - condition:
+      - type: slot
+        name: name_entered
+        value: true
+    text: Mình chưa hiểu ý của {name} lắm. Bạn vui lòng kiểm tra lại câu của bạn có dấu thanh chưa hay có lỗi chính tả không. Nếu câu của {name} hợp lệ thì đội ngũ phát triển sẽ cập nhật vào dữ liệu sau.
+  - text: Mình chưa hiểu ý của bạn lắm. Bạn vui lòng kiểm tra lại câu của bạn có dấu thanh chưa hay có lỗi chính tả không. Nếu câu của bạn hợp lệ thì đội ngũ phát triển sẽ cập nhật vào dữ liệu sau.
+
+actions:
+- action_utter_metrostar_location
+- action_utter_loan_procedure
+- action_utter_how_to_pay
+- action_utter_amount_of_money_to_pay
+- action_utter_utility_detail
+- action_utter_legal_docs
+- action_utter_raise_capital_letter
+- action_utter_30_floors_construction_permit
+- action_utter_sale_contract_signning_condition
+- action_utter_bank_guarantee
+- action_utter_sale_contract_signning_time
+- action_utter_sale_contract_transfer_file
+- action_utter_sale_contract_transfer_procedure
+- action_utter_liquidation_procedure
+- action_store_consultation_info
+- action_store_sample_house_visitor_info
+
+forms:
+  name_form:
+    required_slots:
+      name:
+      - type: from_entity
+        entity: name
+        intent: user_give_name
+  consultation_info_form:
+    required_slots:
+      name:
+      - type: from_entity
+        entity: name
+        intent: user_give_name
+      email:
+      - type: from_entity
+        entity: email
+        intent: user_give_email
+      phone_number:
+      - type: from_entity
+        entity: phone_number
+        intent: user_give_phone_number
+  sample_house_visitor_form:
+    required_slots:
+      name:
+      - type: from_entity
+        entity: name
+        intent: user_give_name
+      email:
+      - type: from_entity
+        entity: email
+        intent: user_give_email
+      phone_number:
+      - type: from_entity
+        entity: phone_number
+        intent: user_give_phone_number
+      visit_date:
+      - type: from_entity
+        entity: date
+        intent: user_give_date
+      visit_time:
+      - type: from_entity
+        entity: time
+        intent: user_give_time
+e2e_actions: []

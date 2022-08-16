@@ -1,0 +1,392 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+stories:
+- story: User give name at conversation start 1
+  steps:
+  - user: |
+      getting started
+    intent: greet
+  - action: utter_welcome
+  - action: name_form
+  - active_loop: name_form
+  - user: |
+      Nam
+    intent: user_give_name
+  - action: name_form
+  - active_loop: null
+  - action: utter_metrostar_basic_info
+
+- story: User give name at conversation start 2
+  steps:
+  - user: |
+      chào
+    intent: greet
+  - action: utter_welcome
+  - action: name_form
+  - active_loop: name_form
+  - user: |
+      Nguyễn Hoài Nam
+    intent: user_give_name
+  - action: name_form
+  - active_loop: null
+  - action: utter_metrostar_basic_info
+
+- story: greet back user
+  steps:
+  - user: |
+      xin chào
+    intent: greet
+  - action: utter_greet
+
+- story: say goodbye anytime the user says goodbye
+  steps:
+  - user: |
+      bye-bye!
+    intent: goodbye
+  - action: utter_goodbye
+
+- story: bot challenge
+  steps:
+  - user: |
+      Bạn là bot hả?
+    intent: bot_challenge
+  - action: utter_iamabot
+
+- story: reply to thank
+  steps:
+  - user: |
+      Cảm ơn nha
+    intent: thank
+  - action: utter_urwelcome
+
+- story: reponse whenever they send a message with low NLU confidence
+  steps:
+  - user: |
+      hảo hán
+    intent: nlu_fallback
+  - action: utter_for_fallback
+
+- story: reponse when user buy to invest
+  steps:
+  - user: |
+      Mua để đầu tư
+    intent: user_buy_to_invest
+  - action: utter_metrostar_invest_info
+
+- story: reponse when user buy to stay
+  steps:
+  - user: |
+      Mua để ở
+    intent: user_buy_to_stay
+  - action: utter_detail_for_user_buy_to_stay
+
+- story: utter webiste when user want to visit it
+  steps:
+  - user: |
+      ghé website
+    intent: user_want_visit_website
+  - action: utter_website
+
+- story: reponse when user want metrostar detail
+  steps:
+  - user: |
+      Giới thiệu dự án
+    intent: user_want_metrostar_detail
+  - action: utter_metrostar_details
+
+- story: reponse when user want to know investor
+  steps:
+  - user: |
+      Chủ đầu tư của dự án
+    intent: user_want_to_know_investors
+  - action: utter_investors
+
+- story: reponse when user want to know location
+  steps:
+  - user: |
+      Vị trí dự án
+    intent: user_want_to_know_metrostar_location
+  - action: action_utter_metrostar_location
+
+- story: reponse when user want to know scale
+  steps:
+  - user: |
+      Quy mô dự án
+    intent: user_want_to_know_metrostar_scale
+  - action: utter_metrostar_scale
+
+- story: reponse when user want sales policy
+  steps:
+  - user: |
+      Chính sách bán hàng
+    intent: user_want_sales_policy
+  - action: utter_sales_policy
+
+- story: reponse when user ask about loan procedure
+  steps:
+  - user: |
+      Thủ tục vay vốn
+    intent: user_ask_about_loan_procedure
+  - action: action_utter_loan_procedure
+
+- story: reponse when user ask type of loan
+  steps:
+  - user: |
+      Các chế độ vay
+    intent: user_ask_type_of_loan
+  - action: utter_type_of_loan
+
+- story: reponse when user ask preferential interest rate
+  steps:
+  - user: |
+      Lãi suất vay
+    intent: user_ask_preferential_interest_rate
+  - action: utter_preferential_interest_rate
+
+- story: reponse when user ask how to pay
+  steps:
+  - user: |
+      Thanh toán
+    intent: user_ask_how_to_pay
+  - action: action_utter_how_to_pay
+
+- story: reponse when user ask amount of money to pay
+  steps:
+  - user: |
+      Số tiền cần thanh toán
+    intent: user_ask_amount_of_money_to_pay
+  - action: action_utter_amount_of_money_to_pay
+
+- story: reponse when user want to know internal area
+  steps:
+  - user: |
+      Nội khu
+    intent: user_want_to_know_internal_area
+  - action: utter_internal_area
+
+- story: reponse when user ask for flat detail
+  steps:
+  - user: |
+      Căn hộ
+    intent: user_ask_flat_detail
+  - action: utter_flat_detail
+
+- story: reponse when user ask for shophouse detail
+  steps:
+  - user: |
+      shophouse
+    intent: user_ask_shophouse_detail
+  - action: utter_shophouse_detail
+
+- story: reponse when user ask for utility detail
+  steps:
+  - user: |
+      Tiện ích
+    intent: user_ask_utility_detail
+  - action: action_utter_utility_detail
+
+- story: reponse when user want to know progress
+  steps:
+  - user: |
+      Tiến độ dự án
+    intent: user_want_to_know_progress
+  - action: utter_metrostar_progress
+
+- story: activate consultation info form when user need consultation
+  steps:
+  - user: |
+      Tư vấn
+    intent: user_need_consultation
+  - action: consultation_info_form
+  - active_loop: consultation_info_form
+  - user: |
+      Nguyễn Hoài Nam
+    intent: user_give_name
+  - action: consultation_info_form
+  - active_loop: consultation_info_form
+  - user: |
+      hoai.nam@gmail.com
+    intent: user_give_email
+  - action: consultation_info_form
+  - active_loop: consultation_info_form
+  - user: |
+      0969597989
+    intent: user_give_phone_number
+  - action: consultation_info_form
+  - active_loop: null
+  - action: action_store_consultation_info
+
+- story: User register to visit sample house 1
+  steps:
+  - user: |
+      Đăng ký xem nhà mẫu
+    intent: user_register_to_visit_sample_house
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+  - user: |
+      Nguyễn Hoài Nam
+    intent: user_give_name
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+  - user: |
+      nam-hoai@gmail.com
+    intent: user_give_email
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+  - user: |
+      0969966996
+    intent: user_give_phone_number
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+  - user: |
+      20/02
+    intent: user_give_date
+  - action: sample_house_visitor_form
+  - active_loop: sample_house_visitor_form
+  - user: |
+      13 giờ chiều
+    intent: user_give_time
+  - action: sample_house_visitor_form
+  - active_loop: null
+  - action: action_store_sample_house_visitor_info
+
+- story: reponse when user complain
+  steps:
+  - user: |
+      Trông như lừa đảo
+    intent: complain
+  - action: utter_handle_complain
+
+- story: reponse when user ask legal docs
+  steps:
+  - user: |
+      Pháp lý của dự án
+    intent: user_ask_legal_docs
+  - action: action_utter_legal_docs
+
+- story: reponse when user ask raise capital letter
+  steps:
+  - user: |
+      Công văn huy động vốn
+    intent: user_ask_raise_capital_letter
+  - action: action_utter_raise_capital_letter
+
+- story: reponse when user ask construction permit
+  steps:
+  - user: |
+      Giấy phép xây dựng
+    intent: user_ask_construction_permit
+  - action: utter_construction_permit
+
+- story: reponse when user ask 30 floors construction permit
+  steps:
+  - user: |
+      Giấy phép xây dựng 30 tầng
+    intent: user_ask_30_floors_construction_permit
+  - action: action_utter_30_floors_construction_permit
+
+- story: reponse when user ask sale contract
+  steps:
+  - user: |
+      Hợp đồng mua bán
+    intent: user_ask_sale_contract_signning_condition
+  - action: action_utter_sale_contract_signning_condition
+
+- story: reponse when user ask apartment hand over time
+  steps:
+  - user: |
+      Thời điểm bàn giao nhà
+    intent: user_ask_apt_hand_over_time
+  - action: utter_apt_hand_over_time
+
+- story: reponse when user ask about bank guarantee
+  steps:
+  - user: |
+      Bảo lãnh ngân hàng
+    intent: user_ask_bank_guarantee
+  - action: action_utter_bank_guarantee
+
+- story: reponse when user ask sale contract signning procedure
+  steps:
+  - user: |
+      Thủ tục ký kết
+    intent: user_ask_sale_contract_signning_procedure
+  - action: utter_sale_contract_signning_procedure
+
+- story: reponse when user ask sale contract signning time
+  steps:
+  - user: |
+      Thời gian ký kết hợp đồng
+    intent: user_ask_sale_contract_signning_time
+  - action: action_utter_sale_contract_signning_time
+
+- story: reponse when user ask sale contract signning file
+  steps:
+  - user: |
+      Hồ sơ ký kết hợp đồng
+    intent: user_ask_sale_contract_signning_file
+  - action: utter_sale_contract_signning_file
+
+- story: reponse when user want edit sale contract signning file
+  steps:
+  - user: |
+      Thay đổi thông tin hợp đồng mua bán
+    intent: user_want_edit_sale_contract_signning_file
+  - action: utter_edit_sale_contract_signning_file
+
+- story: reponse when user ask sale contract transfer procedure
+  steps:
+  - user: |
+      Thủ tục chuyển nhượng hợp đồng mua bán
+    intent: user_ask_sale_contract_transfer_procedure
+  - action: action_utter_sale_contract_transfer_procedure
+
+- story: reponse when user ask sale contract transfer file
+  steps:
+  - user: |
+      Hồ sơ chuyển nhượng hợp đồng mua bán
+    intent: user_ask_sale_contract_transfer_file
+  - action: action_utter_sale_contract_transfer_file
+
+- story: reponse when user ask sale contract transfer fee
+  steps:
+  - user: |
+      Phí chuyển nhượng hợp đồng mua bán
+    intent: user_ask_sale_contract_transfer_fee
+  - action: utter_sale_contract_transfer_fee
+
+- story: reponse when user ask liquidate procedure
+  steps:
+  - user: |
+      Thủ tục thanh lý
+    intent: user_ask_liquidation_procedure
+  - action: action_utter_liquidation_procedure
+
+- story: reponse when user ask liquidation file
+  steps:
+  - user: |
+      Hồ sơ thanh lý
+    intent: user_ask_liquidation_file
+  - action: utter_liquidation_file
+
+- story: reponse when user ask when they get money after liquidation
+  steps:
+  - user: |
+      Thời gian nhận tiền sau thanh lý
+    intent: user_ask_when_they_get_money_after_liquidation
+  - action: utter_money_after_liquidation
+
+- story: reponse when user ask operation management fee
+  steps:
+  - user: |
+      Phí quản lý vận hành
+    intent: user_ask_operation_management_fee
+  - action: utter_operation_management_fee
+
+- story: reponse when user ask parking lot
+  steps:
+  - user: |
+      Chỗ đỗ xe
+    intent: user_ask_parking_lot
+  - action: utter_parking_lot
